@@ -60,7 +60,7 @@ function App() {
               lineHeight: 1
             }}
           >
-            Some stuff
+            {window.title}
           </Textfit>
         </h1>
         <div
@@ -85,11 +85,11 @@ function App() {
               }
             }}
           >
-            <li>react</li>
-            <li>serverless</li>
-            <li>figma</li>
+            {window.tags.map(tag => (
+              <li key={tag}>{tag}</li>
+            ))}
           </ul>
-          <span>@chrisbiscardi</span>
+          <span>{window.author}</span>
         </div>
       </div>
     </div>

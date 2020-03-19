@@ -21,6 +21,13 @@ exports.handler = async function(event, ctx) {
     </body>
   </html>
   `);
+  await page.addScriptTag({
+    content: `
+  window.title = "title from script";
+  window.tags = ["one", "two", "three"];
+  window.author = "@chrisbiscardi";
+  `
+  });
   await page.addScriptTag({ content: script });
   const boundingRect = await page.evaluate(() => {
     const corgi = document.getElementById("corgi");
