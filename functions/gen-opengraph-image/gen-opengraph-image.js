@@ -21,11 +21,15 @@ exports.handler = async function(event, ctx) {
     </body>
   </html>
   `);
+  const { queryStringParameters } = event;
+  const tags = queryStringParameters.tags
+    ? decodeURIComponent(queryStringParameters.tags).split(",")
+    : [];
   await page.addScriptTag({
     content: `
-  window.title = "title from script";
-  window.tags = ["one", "two", "three"];
-  window.author = "@chrisbiscardi";
+  window.title = ${queryStringParameters.title || "No Title"};
+  window.tags = ${JSON.stringify(tags)};
+  window.author = ${queryStringParameters.author || ""};
   `
   });
   await page.addScriptTag({ content: script });
