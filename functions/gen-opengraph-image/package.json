@@ -3,5 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "christopherbiscardi <chris@christopherbiscardi.com> (@chrisbiscardi)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "playwright-aws-lambda": "^0.4.0",
+    "playwright-core": "^0.11.1"
+  }
 }
