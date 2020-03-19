@@ -13,7 +13,7 @@ exports.handler = async function(event, ctx) {
     </head>
   
     <body>
-      <div id="corgi"><div>CORGIIIS</div></div>
+      <div id="corgi"><div>NO CORGIS HERE</div></div>
     </body>
   </html>
   `);
