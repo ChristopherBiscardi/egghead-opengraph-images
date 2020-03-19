@@ -5,7 +5,19 @@
   "author": "christopherbiscardi <chris@christopherbiscardi.com> (@chrisbiscardi)",
   "license": "MIT",
   "dependencies": {
+    "@emotion/core": "^10.0.28",
     "playwright-aws-lambda": "^0.4.0",
-    "playwright-core": "^0.11.1"
+    "playwright-core": "^0.11.1",
+    "react-textfit": "^1.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "rollup": "^2.1.0",
+    "rollup-plugin-babel": "^4.4.0"
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.js"
   }
 }
