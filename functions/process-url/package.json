@@ -1,0 +1,10 @@
+{
+  "name": "process-url",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "christopherbiscardi <chris@christopherbiscardi.com> (@chrisbiscardi)",
+  "license": "MIT",
+  "dependencies": {
+    "cloudinary": "^1.20.0"
+  }
+}
