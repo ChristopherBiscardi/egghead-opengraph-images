@@ -8,7 +8,7 @@ cloudinary.config({
 
 exports.handler = async function(event, ctx) {
   const { queryStringParameters } = event;
-
+  console.log(queryStringParameters);
   try {
     // https://res.cloudinary.com/sector/image/upload/v1583637123/og-images/img-1.png
     const imageUrl = cloudinary.url(
@@ -25,6 +25,9 @@ exports.handler = async function(event, ctx) {
         }
       }
     );
+    console.log(`https://relaxed-payne-d1bfbe.netlify.com/.netlify/functions/gen-opengraph-image?${qs.stringify(
+            queryStringParameters
+          )}`)
     return {
       statusCode: 302,
       headers: {
