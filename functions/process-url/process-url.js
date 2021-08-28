@@ -13,9 +13,9 @@ exports.handler = async function(event, ctx) {
     const imageUrl = cloudinary.url(
       `${process.env.CLOUDINARY_BASE_OG_IMAGE}`,
       {
-        // resouce_type: "raw"
+        resouce_type: "raw"
         sign_url: true,
-        // secure: true,
+        secure: true,
         custom_pre_function: {
           function_type: "remote",
           source: `${process.env.GEN_OPENGRAPH_IMAGE_BASE_URL}?${qs.stringify(
