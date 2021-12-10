@@ -1,39 +1,36 @@
 const cloudinary = require("cloudinary").v2;
 const qs = require("querystring");
 cloudinary.config({
-  cloud_name: "sector",
+  cloud_name: process.env.CLOUDINARY_CLOUD,
   api_key: process.env.CLOUDINARY_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET
+  api_secret: process.env.CLOUDINARY_SECRET,
 });
 
-exports.handler = async function(event, ctx) {
+exports.handler = async function (event, ctx) {
   const { queryStringParameters } = event;
   console.log(queryStringParameters);
   try {
-    // https://res.cloudinary.com/sector/image/upload/v1583637123/og-images/img-1.png
-    const imageUrl = cloudinary.url(
-      `${process.env.CHRIS_IMAGE_VERSION}/og-images/img-2.png`,
-      {
-        // resouce_type: "raw"
-        sign_url: true,
-        // secure: true,
-        custom_pre_function: {
-          function_type: "remote",
-          source: `https://relaxed-payne-d1bfbe.netlify.app/.netlify/functions/gen-opengraph-image?${qs.stringify(
-            queryStringParameters
-          )}`
-        }
-      }
+    const imageUrl = cloudinary.url(`${process.env.CLOUDINARY_BASE_OG_IMAGE}`, {
+      sign_url: true,
+      secure: true,
+      custom_pre_function: {
+        function_type: "remote",
+        source: `${process.env.GEN_OPENGRAPH_IMAGE_BASE_URL}?${qs.stringify(
+          queryStringParameters
+        )}`,
+      },
+    });
+    console.log(
+      `${process.env.GEN_OPENGRAPH_IMAGE_BASE_URL}?${qs.stringify(
+        queryStringParameters
+      )}`
     );
-    console.log(`https://relaxed-payne-d1bfbe.netlify.app/.netlify/functions/gen-opengraph-image?${qs.stringify(
-            queryStringParameters
-          )}`)
     return {
       statusCode: 302,
       headers: {
-        Location: imageUrl
+        Location: imageUrl,
       },
-      body: ""
+      body: "",
     };
   } catch (e) {
     console.log(e);

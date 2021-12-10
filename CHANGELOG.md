@@ -13,7 +13,9 @@
   - ./img-1.png (added)
 
 - Upgrade packages under gen-opengraph-image. Modernize rollup config.
+
   ## Files affected:
+
   - ./Makefile
   - ./functions/gen-opengraph-image/.babelrc (deleted)
   - ./functions/gen-opengraph-image/gen-opengraph-image.js
@@ -22,3 +24,11 @@
   - ./functions/gen-opengraph-image/package-lock.json (added)
   - ./functions/gen-opengraph-image/rollup.config.js
   - ./functions/gen-opengraph-image/yarn.lock (deleted)
+
+- Upgrade cloudinary package. Use environment variables for cloudinary configuration (credit goes to alanwsmith).
+  ## Files affected:
+  - ./Makefile
+  - ./functions/process-url/process-url.js
+  - ./functions/process-url/package.json
+  - ./functions/process-url/package-lock.json (added)
+  - ./functions/process-url/yarn.lock (deleted)
