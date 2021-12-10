@@ -1,14 +1,15 @@
 const playwright = require("playwright-aws-lambda");
+const path = require("path");
 const fs = require("fs");
 const script = fs.readFileSync(path.resolve(__dirname, "image.js"), "utf-8");
 
-exports.handler = async function(event, ctx) {
+exports.handler = async function (event, ctx) {
   const browser = await playwright.launchChromium();
-  const context = await browser._defaultContext;
+  const context = await browser.newContext();
   const page = await context.newPage();
   page.setViewportSize({
     width: 1200,
-    height: 630
+    height: 630,
   });
   await page.setContent(`<!DOCTYPE html>
   <html>
@@ -28,9 +29,9 @@ exports.handler = async function(event, ctx) {
   await page.addScriptTag({
     content: `
   window.title = "${queryStringParameters.title || "No Title"}";
-  window.tags = ${JSON.stringify(tags)};
+  window.tags = ${JSON.stringify(tags) || ""};
   window.author = "${queryStringParameters.author || ""}";
-  `
+  `,
   });
   await page.addScriptTag({ content: script });
   const boundingRect = await page.evaluate(() => {
@@ -46,8 +47,8 @@ exports.handler = async function(event, ctx) {
     statusCode: 200,
     headers: {
       "Content-Type": "image/png",
-      "Content-Length": screenshotBuffer.length.toString()
+      "Content-Length": screenshotBuffer.length.toString(),
     },
-    body: screenshotBuffer.toString("base64")
+    body: screenshotBuffer.toString("base64"),
   };
 };
